@@ -51,7 +51,7 @@ In order to have restaurants, types of food, delivery services and all the data 
 
 - ## API endpoints
 
-  GET - /contacts - to get all the contacts
-  GET - /contacts/:id - to get one contact by ID
-  DELETE - /contacts/:id - to delete a contact
-  POST - /contacts - to create a new contact
+- GET - /contacts - to get all the contacts
+- GET - /contacts/:id - to get one contact by ID
+- DELETE - /contacts/:id - to delete a contact
+- POST - /contacts - to create a new contact
