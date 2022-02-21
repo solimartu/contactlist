@@ -3,11 +3,14 @@ var router = express.Router();
 var models = require("../models");
 var emailShouldBeUnique = require("../guards/emailShouldBeUnique");
 const { Op } = require("sequelize");
+const contact = require("../models/contact");
 
 /* GET contacts listing. */
 router.get("/", async function (req, res) {
   try {
-    const contacts = await models.Contact.findAll({});
+    const contacts = await models.Contact.findAll({
+      order: [["firstName", "ASC"]],
+    });
     res.send(contacts);
   } catch (error) {
     res.status(500).send(error);
@@ -21,7 +24,6 @@ router.get("/:id", async function (req, res) {
       where: {
         id: req.params.id,
       },
-      order: ["firstName", "ASC"],
     });
     res.send(contact);
   } catch (error) {
@@ -30,22 +32,40 @@ router.get("/:id", async function (req, res) {
 });
 
 // //GET a contact by searching
-// router.get("/search", async function (req, res) {
-//   try {
-//     const contact = await models.Contact.findAll({
-//       where: {
-//         [Op.or]: {
-//           [Op.like]: req.body,
-//           [Op.startsWith]: req.body,
-//           [Op.endsWith]: req.body,
-//         },
-//       },
-//     });
-//     res.send(contact);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// });
+router.get("/search", async function (req, res) {
+  const { input } = req.query;
+  try {
+    const contact = await models.Contact.findAll({
+      // where: { firstName: req.query },
+      // where: {
+      //   [Op.or]: {
+      //     [Op.like]: req.params,
+      //     [Op.startsWith]: req.body,
+      //     [Op.endsWith]: req.body,
+      //   },
+      // },
+      where: {
+        [Op.or]: [
+          { firstName: { [Op.like]: "%" + input + "%" } },
+          { lastName: { [Op.like]: "%" + query + "%" } },
+        ],
+      },
+    });
+    res.send(contact);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// var options = {
+//   where: {
+//     [Op.or]: [
+//       { 'subject': { [Op.like]: '%' + query + '%' } },
+//       { '$Comment.body$': { [Op.like]: '%' + query + '%' } }
+//     ]
+//   },
+//
+// };
 
 //POST a new contact
 router.post("/", emailShouldBeUnique, async (req, res) => {
