@@ -24,7 +24,7 @@ A contact list where you can add and delete contacts.
 ```bash
   DB_HOST=localhost
   DB_USER=root
-  DB_NAME=allergens
+  DB_NAME=contactlist
   DB_PASS=YOURPASSWORD
 ```
 
