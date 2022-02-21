@@ -15,3 +15,39 @@ code {
   border-radius: 1rem;
   box-shadow: 0px 3px 8px 0px #8080806b;
 }
+
+.circulo {
+  width: 10rem;
+  /* height: 10rem; */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.circulo > p {
+  font-family: sans-serif;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+.link:hover {
+  color: white;
+  text-decoration: none;
+}
+.bg-fact {
+  background-color: #ff355e;
+}
+.bg-fact-out {
+  background: none;
+  border-color: #25253d;
+  color: #25253d;
+}
+.bg-back {
+  background-color: #f4f4f5;
+}
